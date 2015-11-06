@@ -3,20 +3,20 @@
     <head>
         <meta charset="utf-8" />
         <meta name="format-detection" content="telephone=no" />
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height" />
         <link rel="stylesheet" type="text/css" href="css/index.css" />
         <title>Google OAuth with PhoneGap</title>
     </head>
     <body>
         <div class="app">
             <div id="login">
-				Önder:PhoneGapTest<br><br><br>
+		Önder:PhoneGapTest v.0.4<br><br><br>
                 <a>Google ile Giriş Yap!</a>
                 <p></p>
             </div>
 			<br><br><br>
 			<a href="javascript:void(0)" id="test">Load JSON</a><br>
-			<h1>...</h1>
+			<h1 id="out">...</h1>
         </div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
@@ -26,8 +26,9 @@
 
 			$( document ).ready(function() {
 				$("#test").click(function(){
+					$("#out").html("loading");
 					$.post( "http://devignerworks.com/projin/?/service/index", function( data ) {
-						$("h1").html("DATA:" + data.id);
+						$("#out").html("DATA:" + data.id);
 					},"json");
 				});
 			});		
