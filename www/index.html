@@ -18,6 +18,29 @@
 			<a href="javascript:void(0)" id="test">Load JSON</a><br>
 			<h1 id="out">...</h1>
         </div>
+       <div>
+NOTE: On Android 2.3 and before, domain whitelisting only works for href hyperlinks, not referenced resources such as images and scripts. Take steps to avoid scripts from being injected into the application.
+
+NOTE: In order to prevent external URLs such as mailto: from being opened in the Cordova webview as of Cordova 3.6.0, specifying origin="*" will implicity add rules for http and https protocols. If you require access to additional custom protocols, then you should also add them explicity to the whitelist. Also see "External Application Whitelist" below for more information on launching external applications by URL.
+
+NOTE: Some network requests do not go through the Cordova Whitelist. This includes <video> and <audio> resouces, WebSocket connections (on Android 4.4+), and possibly other non-http requests. On Android 4.4+, you can include a CSP header in your HTML documents to restrict access to those resources. On older versions of Android, it may not be possible to restrict them.
+
+External Application Whitelist
+
+Cordova 3.6.0 introduces a second whitelist, for restricting which URLs are allowed to launch external applications. In previous versions of Cordova, all non-http URLs, such as mailto:, geo:, sms: and intent, were implicitly allowed to be the target of an <a> tag. Because of the potential for an application to leak information, if an XSS vulnerability allows an attacker to construct arbitrary links, these URLs must be whitelisted as well, starting in Cordova 3.6.0.
+
+To allow a URL pattern to launch an external application, use an <access> tag in your config.xml file, with the launch-external attribute set.       	
+       	
+When navigating to a URL from within your application, the interal whitelist is tested first, and if the URL is not whitelisted there, then the external whitelist is tested. This means that any http: or https: URLs which match both whitelists will be opened inside of the Cordova application, rather than launching the external browser.
+
+iOS Whitelisting
+
+The platform's whitelisting rules are found in the named application directory's config.xml file.
+
+Origins specified without a protocol, such as www.apache.org rather than http://www.apache.org, default to all of the http, https, ftp, and ftps schemes.
+
+Wildcards on the iOS platform are more flexible than in the W3C Widget Access specification. For example, the following accesses all subdomains and top-level domains such as .com and .net:       	
+       </div>
 		<script>
 
 /*! jQuery v1.10.1 | (c) 2005, 2013 jQuery Foundation, Inc. | jquery.org/license
