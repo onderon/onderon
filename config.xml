@@ -67,6 +67,10 @@
   <access uri="http://devignerworks.com" subdomains="true" />
   <access origin="*" launch-external="yes" />
   <plugin name="cordova-plugin-whitelist" version="1"/>
+
+  <allow-navigation href="http://devignerworks.com/*" />
+  <allow-navigation href="*://*.devignerworks.com/*" />
+
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
   <allow-intent href="tel:*"/>
